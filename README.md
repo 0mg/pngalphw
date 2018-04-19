@@ -2,7 +2,7 @@
 
 **pngalphw.exe** for Windows 10
 
-convert opaque PNG to alpha-99%-1px-overwised PNG.
+convert opaque PNG to alpha-99% PNG.
 
 ## usage
 

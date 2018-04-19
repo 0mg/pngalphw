@@ -15,7 +15,7 @@ void convert(LPWSTR pathname) {
     puts(TEXT("ERROR: invalid picture file name.\n"));
     return;
   }
-  puts(TEXT("OK: checking..."));
+  puts(TEXT("OK: processing..."));
   // check if picture has alpha pixel
   for (UINT y = 0; y < height; y++) {
     for (UINT x = 0; x < width; x++) {
@@ -25,16 +25,13 @@ void convert(LPWSTR pathname) {
         puts(TEXT("has already alpha pixel.\n"));
         return;
       }
+      // modify picture
+      ARGB pxcol = color.GetValue();
+      pxcol &= 0xFEFFFFFF;
+      color.SetValue(pxcol);
+      bm.SetPixel(x, y, color);
     }
   }
-  // modify picture
-  puts(TEXT("\nOK: creating..."));
-  Color color;
-  bm.GetPixel(0, 0, &color);
-  ARGB pxcol = color.GetValue();
-  pxcol &= 0xFEFFFFFF;
-  color.SetValue(pxcol);
-  bm.SetPixel(0, 0, color);
   // PNG {557CF406-1A04-11D3-9A73-0000F81EF32E}
   CLSID clsid = {0x557CF406, 0x1A04, 0x11D3,
     {0x9A, 0x73, 0x00, 0x00, 0xF8, 0x1E, 0xF3, 0x2E}};
